@@ -10,7 +10,8 @@ input[type=number] {
 
 .full {
   width: 100vw;
-  height: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .flex-col {
@@ -42,14 +43,68 @@ input[type=number] {
           transform: rotateY(180deg);
 }
 
+@-webkit-keyframes glow {
+  5% {
+    background-color: #ffa500;
+  }
+  10% {
+    background-color: #FCEF93;
+  }
+  60% {
+    background-color: #ffa500;
+  }
+  65% {
+    background-color: #FCEF93;
+  }
+  95% {
+    background-color: #ffa500;
+  }
+  100% {
+    background-color: #FCEF93;
+  }
+}
+
+@keyframes glow {
+  5% {
+    background-color: #ffa500;
+  }
+  10% {
+    background-color: #FCEF93;
+  }
+  60% {
+    background-color: #ffa500;
+  }
+  65% {
+    background-color: #FCEF93;
+  }
+  95% {
+    background-color: #ffa500;
+  }
+  100% {
+    background-color: #FCEF93;
+  }
+}
+
 * {
-  padding: 0;
-  margin: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 body {
   font-size: 14px;
+}
+
+.glow-aniamtion {
+  position: relative;
+  -webkit-animation: glow 3s ease infinite;
+          animation: glow 3s ease infinite;
+}
+
+.page {
+  background: url("./../images/pumpkin.png") no-repeat center;
+  background-size: cover;
+  position: absolute;
 }
 /*# sourceMappingURL=main.css.map */

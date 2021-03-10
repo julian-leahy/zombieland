@@ -8,16 +8,20 @@ socket.on('setPlayer', setPlayerNumber);
 socket.on('unknownCode', unknownCode);
 socket.on('tooManyPlayers', tooManyPlayers);
 socket.on('displayQuestion', displayQuestion);
-
+socket.on('questionResults', questionResults);
 
 /**** sections for show or hide ****/
 const createJoinSection = document.querySelector('#createJoinSection');
 const selectedPlayerSection = document.querySelector('#selectedPlayerSection');
 const gamePageSelection = document.querySelector('#gamePageSelection');
-/**** show players image ****/
+
+/**** show players image and game code ****/
 const playerProfile = document.querySelector('#playerProfile');
-/**** get game code ****/
 const gameCodeInput = document.querySelector('#gameCodeInput');
+
+/**** players input to question ****/
+const userInput = document.querySelector('#userInput');
+
 
 /**** buttons ****/
 const createGameBtn = document.querySelector('#createGameBtn');
@@ -31,6 +35,7 @@ gameCodeInput.addEventListener('keyup', function(e) {
 
 /**** globals ****/
 let playerNumber;
+let submitted = true;
 
 function createGame() {
     socket.emit('createNewRoom');
@@ -63,7 +68,21 @@ function setPlayerNumber(player) {
 function displayQuestion(state, isNewGame) {
     if (isNewGame) showHide(gamePageSelection, selectedPlayerSection);
     questionInput(JSON.parse(state));
+    userInput.focus();
 }
+
+function questionResults(args) {
+
+}
+
+userInput.addEventListener('keyup', (e) => {
+    if (e.code === 'Enter' && userInput.value && submitted) {
+        submitted = false;
+        userInput.style.backgroundColor = '#ffa500';
+        const answer = { id: playerNumber, input: userInput.value };
+        socket.emit('playerInput', JSON.stringify(answer));
+    }
+})
 
 // TODO
 function unknownCode(args) {

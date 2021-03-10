@@ -6,15 +6,17 @@ const io = require("socket.io")(httpServer, {
     }
 });
 const { createRoomName } = require('./utils');
-const { initGameState, question } = require('./game');
+const { initGameState, question, checkAnswers } = require('./game');
 
 /* Globals */
 const clientRoom = {};
 const state = {};
+let playerCount = 0;
 
 io.on('connection', client => {
     client.on('createNewRoom', handleCreateNewRoom);
     client.on('joinRoom', handleJoinRoom);
+    client.on('playerInput', handlePlayerInput);
 
     function handleCreateNewRoom() {
         const room = createRoomName(5);
@@ -53,6 +55,26 @@ io.on('connection', client => {
         emitAllDisplayQuestion(room, true);
     }
 
+    function handlePlayerInput(playerInput) {
+        const playerAnswer = JSON.parse(playerInput);
+        const room = clientRoom[client.id];
+        const players = state[room].players;
+        const correctAnswer = state[room].question.answer;
+
+        /* Record timestamp with players input */
+        players[playerAnswer.id - 1].time = Date.now();
+        players[playerAnswer.id - 1].answer = playerAnswer.input;
+        playerCount += 1;
+
+        /* Wait for both players to answer */
+        if (playerCount == 2) {
+            playerCount = 0;
+            const winner = checkAnswers(players, correctAnswer); // 1,2 or 0 if both wrong
+            emitAllResults(room, winner);
+        }
+
+    }
+
 })
 
 function generateQuestion(room) {
@@ -64,6 +86,11 @@ function emitAllDisplayQuestion(room, newGame) {
         io.sockets.in(room)
             .emit('displayQuestion', JSON.stringify(state[room].question), newGame);
     }, 3000);
+}
+
+function emitAllResults(room, winner) {
+    io.sockets.in(room)
+        .emit('questionResults', winner);
 }
 
 httpServer.listen(process.env.PORT || 3000);

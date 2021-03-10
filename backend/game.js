@@ -1,6 +1,7 @@
 module.exports = {
     initGameState,
-    question
+    question,
+    checkAnswers
 }
 
 function initGameState() {
@@ -38,6 +39,31 @@ function question() {
 
     return question;
 
+}
+
+/**
+ * 
+ * @param {obj} p players results
+ * @param {int} c correct answer
+ * @returns player who won or 0 for neither
+ */
+function checkAnswers(p, c) {
+
+    /* Both answered correctly - fastest wins */
+    if (p[0].answer == c && p[1].answer == c) {
+        return (p[0].time < p[1].time) ? 1 : 2;
+    }
+
+    /* One correct answer only */
+    if (p[0].answer == c && p[1].answer != c) {
+        return 1;
+    }
+
+    if (p[0].answer != c && p[1].answer == c) {
+        return 2;
+    }
+
+    return 0; // Both incorrect
 }
 
 function getQuestionType() {

@@ -49,8 +49,24 @@ input[type=number] {
           flex-direction: row;
 }
 
+.flex-centered {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 .hidden {
   display: none !important;
+}
+
+.zero-opacity {
+  opacity: 0 !important;
 }
 
 .reverse {
@@ -137,19 +153,7 @@ body {
   position: absolute;
 }
 
-.flex-initial-screen {
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.initial-screen {
+.card, .initial-screen, .selected-player {
   background-color: rgba(0, 0, 0, 0.2);
   border: 1px solid #666;
   -webkit-box-align: center;
@@ -160,8 +164,9 @@ body {
   color: #fff;
 }
 
+/* Create and join card */
 .initial-screen .title {
-  font-size: 2rem;
+  font-size: 2em;
 }
 
 .initial-screen button,
@@ -173,5 +178,27 @@ body {
 .initial-screen input {
   font-size: 1.5em;
   padding: 5px;
+}
+
+/* Show selected player card */
+.selected-player {
+  padding: 20px;
+  /* image added dynamically */
+}
+
+.selected-player .game-code-text,
+.selected-player .player-number {
+  font-size: 2em;
+  margin: 10px auto;
+}
+
+.selected-player .player-profile {
+  background-image: url("./../images/girl-selected.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  min-width: 230px;
+  height: 250px;
+  width: 100%;
 }
 /*# sourceMappingURL=main.css.map */

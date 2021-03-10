@@ -14,13 +14,24 @@
 <body>
     <div class="full glow-aniamtion">
         <section class="full page">
-            <div class="flex-initial-screen full">
+
+            <!-- buttons to create or join game -->
+            <div class="flex-centered full" id="createJoinSection">
                 <div class="initial-screen flex-col">
                     <h1 class="title">Zombie Land</h1>
                     <button id="createGameBtn" class="btn">Create New Game</button>
                     <div>OR</div>
                     <input type="text" id="gameCodeInput" placeholder="Enter Game Code" autofocus>
                     <button id="joinGameBtn" class="btn">Join With Code</button>
+                </div>
+            </div>
+
+            <!-- show selected player and game code -->
+            <div class="flex-centered full hidden" id="selectedPlayerSection">
+                <div class="selected-player flex-col">
+                    <div id="gameCodeText" class="game-code-text"></div>
+                    <div id="playerProfile" class="player-profile"></div>
+                    <div id="playerNumber" class="player-number"></div>
                 </div>
             </div>
         </section>

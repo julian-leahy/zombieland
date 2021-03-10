@@ -2,7 +2,8 @@ import { showHide } from "./utils.js";
 
 const socket = io('http://localhost:3000');
 
-socket.on('getGameCode', displayGameCode)
+socket.on('getGameCode', displayGameCode);
+socket.on('setPlayer', setPlayerNumber);
 
 /**** sections for show or hide ****/
 const createJoinSection = document.querySelector('#createJoinSection');
@@ -17,6 +18,8 @@ const joinGameBtn = document.querySelector('#joinGameBtn');
 createGameBtn.addEventListener('click', createGame);
 joinGameBtn.addEventListener('click', joinGame);
 
+/**** globals ****/
+let playerNumber;
 
 function createGame() {
     socket.emit('createNewRoom');
@@ -35,6 +38,9 @@ function initialiseNewGame(player) {
     showHide(selectedPlayerSection, createJoinSection);
 
     const playersImage = (player == 1) ? './images/boy-selected.png' : './images/girl-selected.png';
-    playerProfile.style.backgroundImage = `url('${playersImage}')`
+    playerProfile.style.backgroundImage = `url('${playersImage}')`;
+}
 
+function setPlayerNumber(player) {
+    playerNumber = player;
 }

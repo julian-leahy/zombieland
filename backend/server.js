@@ -6,6 +6,7 @@ const io = require("socket.io")(httpServer, {
     }
 });
 const { createRoomName } = require('./utils');
+const { initGameState } = require('./game');
 
 /* Globals */
 const clientRoom = {};
@@ -18,6 +19,13 @@ io.on('connection', client => {
         const room = createRoomName(5);
         clientRoom[client.id] = room;
         client.emit('getGameCode', room);
+
+        // set initial state
+        state[room] = initGameState();
+
+        client.join(room);
+        client.number = 1;
+        client.emit('setPlayer', 1);
     }
 })
 

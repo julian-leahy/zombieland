@@ -10,6 +10,8 @@ const createJoinSection = document.querySelector('#createJoinSection');
 const selectedPlayerSection = document.querySelector('#selectedPlayerSection');
 /**** show players image ****/
 const playerProfile = document.querySelector('#playerProfile');
+/**** get game code ****/
+const gameCodeInput = document.querySelector('#gameCodeInput');
 
 /**** buttons ****/
 const createGameBtn = document.querySelector('#createGameBtn');
@@ -31,7 +33,9 @@ function displayGameCode(gameCode) {
 }
 
 function joinGame() {
-    console.log('Join Game');
+    const codeEntered = gameCodeInput.value;
+    if (codeEntered == '') return;
+    socket.emit('joinRoom', codeEntered);
 }
 
 function initialiseNewGame(player) {

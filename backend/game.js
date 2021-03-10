@@ -1,7 +1,8 @@
 module.exports = {
     initGameState,
     question,
-    checkAnswers
+    checkAnswers,
+    updateLives
 }
 
 function initGameState() {
@@ -64,6 +65,28 @@ function checkAnswers(p, c) {
     }
 
     return 0; // Both incorrect
+}
+
+/**
+ * 
+ * @param {obj} p players state
+ * @param {int} w winning player
+ * @returns true if anyone dies
+ */
+function updateLives(p, w) {
+    if (w == 1) {
+        let p2 = p[1].lives;
+        p2 -= 1;
+        p[1].lives = p2;
+        return (p2 == 0) ? true : false
+    } else if (w == 2) {
+        let p1 = p[0].lives;
+        p1 -= 1;
+        p[0].lives = p1;
+        return (p1 == 0) ? true : false
+    } else {
+        return false;
+    }
 }
 
 function getQuestionType() {

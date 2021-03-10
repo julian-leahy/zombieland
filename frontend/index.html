@@ -16,7 +16,7 @@
         <section class="full page">
 
             <!-- buttons to create or join game -->
-            <div class="flex-centered-vh full hidden" id="createJoinSection">
+            <div class="flex-centered-vh full" id="createJoinSection">
                 <div class="initial-screen flex-col">
                     <h1 class="title">Zombie Land</h1>
                     <button id="createGameBtn" class="btn">Create New Game</button>
@@ -36,14 +36,14 @@
             </div>
 
             <!-- game page -->
-            <div class="full game-page" id="gamePageSelection">
+            <div class="full game-page hidden" id="gamePageSelection">
 
                 <!-- results table -->
                 <div class="flex-centered-h results-container">
                     <div class="results-table">
                         <table>
                             <tr>
-                                <th colspan="4">Leader Board</th>
+                                <th colspan="4">Leaderboard</th>
                             </tr>
                             <tr>
                                 <th>Player</th>
@@ -51,13 +51,13 @@
                                 <th>Time Diff</th>
                                 <th>Lives</th>
                             </tr>
-                            <tr>
+                            <tr id="first">
                                 <td id="firstIcon">Player 1</td>
                                 <td id="firstAnswer"></td>
                                 <td id="firstTimeDiff"></td>
                                 <td id="firstLives">10</td>
                             </tr>
-                            <tr>
+                            <tr id="second">
                                 <td id="secondIcon">Player 2</td>
                                 <td id="secondAnswer"></td>
                                 <td id="secondTimeDiff"></td>

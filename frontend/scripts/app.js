@@ -1,6 +1,7 @@
 import { showHide } from "./utils.js";
 import questionInput from "./questions.js";
 import { killBoth, killPlayer1, killPlayer2 } from "./animations.js";
+import updateLeaderBoard from "./leaderboard.js";
 
 const socket = io('http://localhost:3000');
 
@@ -72,10 +73,13 @@ function displayQuestion(state, isNewGame) {
     userInput.focus();
 }
 
-function questionResults(winner) {
+function questionResults(winner, playersObj) {
+    const players = JSON.parse(playersObj);
     if (winner == 0) killBoth();
     if (winner == 1) killPlayer2();
     if (winner == 2) killPlayer1();
+
+    updateLeaderBoard(winner, players);
 }
 
 userInput.addEventListener('keyup', (e) => {

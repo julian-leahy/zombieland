@@ -138,6 +138,24 @@ input[type=number] {
   }
 }
 
+@-webkit-keyframes flash {
+  0% {
+    background-color: #ffa500;
+  }
+  100% {
+    background-color: #000;
+  }
+}
+
+@keyframes flash {
+  0% {
+    background-color: #ffa500;
+  }
+  100% {
+    background-color: #000;
+  }
+}
+
 .sprites {
   position: absolute;
   max-width: 900px;
@@ -483,5 +501,10 @@ body {
 
 #secondIcon {
   background-image: url("./../images/girl-icon.png");
+}
+
+.flash-winner {
+  -webkit-animation: flash 1s 3;
+          animation: flash 1s 3;
 }
 /*# sourceMappingURL=main.css.map */

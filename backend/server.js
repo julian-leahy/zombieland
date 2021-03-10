@@ -6,7 +6,7 @@ const io = require("socket.io")(httpServer, {
     }
 });
 const { createRoomName } = require('./utils');
-const { initGameState, question, checkAnswers } = require('./game');
+const { initGameState, question, checkAnswers, updateLives } = require('./game');
 
 /* Globals */
 const clientRoom = {};
@@ -70,6 +70,7 @@ io.on('connection', client => {
         if (playerCount == 2) {
             playerCount = 0;
             const winner = checkAnswers(players, correctAnswer); // 1,2 or 0 if both wrong
+            const gameOver = updateLives(players, winner);
             emitAllResults(room, winner);
         }
 
@@ -90,7 +91,7 @@ function emitAllDisplayQuestion(room, newGame) {
 
 function emitAllResults(room, winner) {
     io.sockets.in(room)
-        .emit('questionResults', winner);
+        .emit('questionResults', winner, JSON.stringify(state[room].players));
 }
 
 httpServer.listen(process.env.PORT || 3000);

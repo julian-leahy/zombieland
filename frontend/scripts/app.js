@@ -1,5 +1,7 @@
 import { showHide } from "./utils.js";
 
+const socket = io('http://localhost:3000');
+
 /**** sections for show or hide ****/
 const createJoinSection = document.querySelector('#createJoinSection');
 const selectedPlayerSection = document.querySelector('#selectedPlayerSection');

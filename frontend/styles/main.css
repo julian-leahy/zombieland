@@ -409,7 +409,7 @@ body {
 
 /* question input group */
 .input-container {
-  margin-top: 40vh;
+  margin-top: 100px;
 }
 
 .input-group {
@@ -441,5 +441,47 @@ body {
 .input-group span.equals {
   font-size: 3em;
   padding-top: 14px;
+}
+
+/* results table */
+.results-container {
+  margin-top: 10px;
+}
+
+.results-container .results-table {
+  width: 750px;
+}
+
+.results-container .results-table table {
+  background-color: #000;
+  border-collapse: collapse;
+  font-size: 1.5em;
+  width: 100%;
+}
+
+.results-container .results-table td,
+.results-container .results-table th {
+  border: 1px solid #ddd;
+  color: #fff;
+  padding: 12px;
+}
+
+.results-container .results-table th {
+  color: #FCEF93;
+}
+
+/* init results table */
+.icon, #firstIcon, #secondIcon {
+  background-repeat: no-repeat;
+  background-position-x: 90%;
+  background-size: contain;
+}
+
+#firstIcon {
+  background-image: url("./../images/boy-icon.png");
+}
+
+#secondIcon {
+  background-image: url("./../images/girl-icon.png");
 }
 /*# sourceMappingURL=main.css.map */

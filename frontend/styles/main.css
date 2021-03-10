@@ -387,13 +387,14 @@ body {
 }
 
 .selected-player .game-code-text,
-.selected-player .player-number {
+.selected-player .getReady {
   font-size: 2em;
   margin: 10px auto;
   color: rgba(204, 204, 204, 0.5);
 }
 
-.selected-player .game-code-text > span {
+.selected-player .game-code-text > span,
+.selected-player .getReady {
   color: #fff;
 }
 

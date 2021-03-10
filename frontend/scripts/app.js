@@ -1,4 +1,5 @@
 import { showHide } from "./utils.js";
+import questionInput from "./questions.js";
 
 const socket = io('http://localhost:3000');
 
@@ -12,6 +13,7 @@ socket.on('displayQuestion', displayQuestion);
 /**** sections for show or hide ****/
 const createJoinSection = document.querySelector('#createJoinSection');
 const selectedPlayerSection = document.querySelector('#selectedPlayerSection');
+const gamePageSelection = document.querySelector('#gamePageSelection');
 /**** show players image ****/
 const playerProfile = document.querySelector('#playerProfile');
 /**** get game code ****/
@@ -44,6 +46,7 @@ function joinGame() {
     if (codeEntered == '') return;
     socket.emit('joinRoom', codeEntered);
     initialiseNewGame(2);
+    document.querySelector('#getReady').innerText = 'Get Ready!';
 }
 
 function initialiseNewGame(player) {
@@ -58,10 +61,8 @@ function setPlayerNumber(player) {
 }
 
 function displayQuestion(state, isNewGame) {
-    if (isNewGame) {
-        // show game hide slectedplayer
-    }
-    console.log(JSON.parse(state))
+    if (isNewGame) showHide(gamePageSelection, selectedPlayerSection);
+    questionInput(JSON.parse(state));
 }
 
 // TODO

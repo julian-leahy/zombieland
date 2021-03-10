@@ -16,7 +16,7 @@
         <section class="full page">
 
             <!-- buttons to create or join game -->
-            <div class="flex-centered-vh full hidden" id="createJoinSection">
+            <div class="flex-centered-vh full" id="createJoinSection">
                 <div class="initial-screen flex-col">
                     <h1 class="title">Zombie Land</h1>
                     <button id="createGameBtn" class="btn">Create New Game</button>
@@ -31,17 +31,17 @@
                 <div class="selected-player flex-col">
                     <div id="gameCodeText" class="game-code-text"></div>
                     <div id="playerProfile" class="player-profile"></div>
-                    <div id="playerNumber" class="player-number"></div>
+                    <div id="getReady" class="getReady"></div>
                 </div>
             </div>
 
             <!-- game page -->
-            <div class="full game-page" id="gamePageSelection">
+            <div class="full game-page hidden" id="gamePageSelection">
                 <div class="flex-centered-h input-container">
                     <div class="input-group flex-row">
-                        <input class="number1" id="number1" type="number" value="123454" readonly>
-                        <span class="operand" id="operand">X</span>
-                        <input class="number2" id="number2" type="number" value="324" readonly>
+                        <input class="number1" id="number1Input" type="number" value="" readonly>
+                        <span class="operand" id="operandDisplay">X</span>
+                        <input class="number2" id="number2Input" type="number" value="" readonly>
                         <span class="equals">=</span>
                         <input type="number" id="userInput" class="user-input" autofocus>
                     </div>

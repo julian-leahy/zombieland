@@ -190,10 +190,14 @@ body {
 .selected-player .player-number {
   font-size: 2em;
   margin: 10px auto;
+  color: rgba(204, 204, 204, 0.5);
+}
+
+.selected-player .game-code-text > span {
+  color: #fff;
 }
 
 .selected-player .player-profile {
-  background-image: url("./../images/girl-selected.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;

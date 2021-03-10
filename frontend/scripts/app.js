@@ -2,12 +2,13 @@ import { showHide } from "./utils.js";
 
 const socket = io('http://localhost:3000');
 
+socket.on('getGameCode', displayGameCode)
+
 /**** sections for show or hide ****/
 const createJoinSection = document.querySelector('#createJoinSection');
 const selectedPlayerSection = document.querySelector('#selectedPlayerSection');
 /**** show players image ****/
 const playerProfile = document.querySelector('#playerProfile');
-
 
 /**** buttons ****/
 const createGameBtn = document.querySelector('#createGameBtn');
@@ -18,8 +19,12 @@ joinGameBtn.addEventListener('click', joinGame);
 
 
 function createGame() {
-    console.log('Create new game');
+    socket.emit('createNewRoom');
     initialiseNewGame(1);
+}
+
+function displayGameCode(gameCode) {
+    document.querySelector('#gameCodeText').innerHTML = `Game Code: <span>${gameCode}</span>`;
 }
 
 function joinGame() {

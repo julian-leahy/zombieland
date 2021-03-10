@@ -37,7 +37,7 @@ io.on('connection', client => {
         }
 
         if (numClients === 0 || !numClients) {
-            client.emit('unKnownCode');
+            client.emit('unknownCode');
             return;
         } else if (numClients > 1) {
             client.emit('tooManyPlayers');

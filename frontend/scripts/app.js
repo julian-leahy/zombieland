@@ -4,6 +4,10 @@ const socket = io('http://localhost:3000');
 
 socket.on('getGameCode', displayGameCode);
 socket.on('setPlayer', setPlayerNumber);
+socket.on('unknownCode', unknownCode);
+socket.on('tooManyPlayers', tooManyPlayers);
+
+
 
 /**** sections for show or hide ****/
 const createJoinSection = document.querySelector('#createJoinSection');
@@ -47,4 +51,14 @@ function initialiseNewGame(player) {
 
 function setPlayerNumber(player) {
     playerNumber = player;
+}
+
+// TODO
+function unknownCode(args) {
+    console.log('Unknown code')
+}
+
+// TODO
+function tooManyPlayers(args) {
+    console.log('Too many players')
 }

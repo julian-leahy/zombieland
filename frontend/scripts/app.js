@@ -23,6 +23,9 @@ const joinGameBtn = document.querySelector('#joinGameBtn');
 
 createGameBtn.addEventListener('click', createGame);
 joinGameBtn.addEventListener('click', joinGame);
+gameCodeInput.addEventListener('keyup', function(e) {
+    e.code === 'Enter' && gameCodeInput.value ? joinGame() : false;
+})
 
 /**** globals ****/
 let playerNumber;
@@ -40,6 +43,7 @@ function joinGame() {
     const codeEntered = gameCodeInput.value;
     if (codeEntered == '') return;
     socket.emit('joinRoom', codeEntered);
+    initialiseNewGame(2);
 }
 
 function initialiseNewGame(player) {

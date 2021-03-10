@@ -60,7 +60,10 @@ function generateQuestion(room) {
 }
 
 function emitAllDisplayQuestion(room, newGame) {
-    io.sockets.in(room).emit('displayQuestion', JSON.stringify(state[room].question), newGame);
+    setTimeout(() => {
+        io.sockets.in(room)
+            .emit('displayQuestion', JSON.stringify(state[room].question), newGame);
+    }, 3000);
 }
 
 httpServer.listen(process.env.PORT || 3000);

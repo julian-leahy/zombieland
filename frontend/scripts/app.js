@@ -58,6 +58,9 @@ function setPlayerNumber(player) {
 }
 
 function displayQuestion(state, isNewGame) {
+    if (isNewGame) {
+        // show game hide slectedplayer
+    }
     console.log(JSON.parse(state))
 }
 

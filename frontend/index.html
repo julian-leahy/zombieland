@@ -16,7 +16,7 @@
         <section class="full page">
 
             <!-- buttons to create or join game -->
-            <div class="flex-centered full" id="createJoinSection">
+            <div class="flex-centered-vh full hidden" id="createJoinSection">
                 <div class="initial-screen flex-col">
                     <h1 class="title">Zombie Land</h1>
                     <button id="createGameBtn" class="btn">Create New Game</button>
@@ -27,13 +27,27 @@
             </div>
 
             <!-- show selected player and game code -->
-            <div class="flex-centered full hidden" id="selectedPlayerSection">
+            <div class="flex-centered-vh full hidden" id="selectedPlayerSection">
                 <div class="selected-player flex-col">
                     <div id="gameCodeText" class="game-code-text"></div>
                     <div id="playerProfile" class="player-profile"></div>
                     <div id="playerNumber" class="player-number"></div>
                 </div>
             </div>
+
+            <!-- game page -->
+            <div class="full game-page" id="gamePageSelection">
+                <div class="flex-centered-h input-container">
+                    <div class="input-group flex-row">
+                        <input class="number1" id="number1" type="number" value="123454" readonly>
+                        <span class="operand" id="operand">X</span>
+                        <input class="number2" id="number2" type="number" value="324" readonly>
+                        <span class="equals">=</span>
+                        <input type="number" id="userInput" class="user-input" autofocus>
+                    </div>
+                </div>
+            </div>
+
         </section>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.2/socket.io.js" integrity="sha512-YybopSVjZU0fe8TY4YDuQbP5bhwpGBE/T6eBUEZ0usM72IWBfWrgVI13qfX4V2A/W7Hdqnm7PIOYOwP9YHnICw==" crossorigin="anonymous"></script>

@@ -138,6 +138,197 @@ input[type=number] {
   }
 }
 
+.sprites {
+  position: absolute;
+  max-width: 900px;
+  width: 90%;
+  bottom: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+
+.sprite-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  bottom: 0;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.boy,
+.girl {
+  height: 226px;
+  width: 270px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.boy .attack {
+  -webkit-animation: boy-attack 1s steps(8) 3;
+          animation: boy-attack 1s steps(8) 3;
+}
+
+.boy .dead {
+  -webkit-animation: boy-dead 1s steps(11) 1s forwards;
+          animation: boy-dead 1s steps(11) 1s forwards;
+}
+
+.boy .idle {
+  -webkit-animation: boy-idle 800ms steps(9) 500ms infinite;
+          animation: boy-idle 800ms steps(9) 500ms infinite;
+}
+
+.girl .attack {
+  -webkit-animation: girl-attack 1s steps(8) 3;
+          animation: girl-attack 1s steps(8) 3;
+}
+
+.girl .dead {
+  -webkit-animation: girl-dead 1s steps(11) 1s forwards;
+          animation: girl-dead 1s steps(11) 1s forwards;
+}
+
+.girl .idle {
+  -webkit-animation: girl-idle 800ms steps(9) infinite;
+          animation: girl-idle 800ms steps(9) infinite;
+}
+
+@-webkit-keyframes boy-attack {
+  from {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+  }
+  to {
+    -webkit-transform: translate3d(0, -1848px, 0);
+            transform: translate3d(0, -1848px, 0);
+  }
+}
+
+@keyframes boy-attack {
+  from {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+  }
+  to {
+    -webkit-transform: translate3d(0, -1848px, 0);
+            transform: translate3d(0, -1848px, 0);
+  }
+}
+
+@-webkit-keyframes boy-dead {
+  from {
+    -webkit-transform: translate3d(0, -1850px, 0);
+            transform: translate3d(0, -1850px, 0);
+  }
+  to {
+    -webkit-transform: translate3d(0, -4420px, 0);
+            transform: translate3d(0, -4420px, 0);
+  }
+}
+
+@keyframes boy-dead {
+  from {
+    -webkit-transform: translate3d(0, -1850px, 0);
+            transform: translate3d(0, -1850px, 0);
+  }
+  to {
+    -webkit-transform: translate3d(0, -4420px, 0);
+            transform: translate3d(0, -4420px, 0);
+  }
+}
+
+@-webkit-keyframes boy-idle {
+  from {
+    -webkit-transform: translate3d(0, -4658px, 0);
+            transform: translate3d(0, -4658px, 0);
+  }
+  to {
+    -webkit-transform: translate3d(0, -100%, 0);
+            transform: translate3d(0, -100%, 0);
+  }
+}
+
+@keyframes boy-idle {
+  from {
+    -webkit-transform: translate3d(0, -4658px, 0);
+            transform: translate3d(0, -4658px, 0);
+  }
+  to {
+    -webkit-transform: translate3d(0, -100%, 0);
+            transform: translate3d(0, -100%, 0);
+  }
+}
+
+@-webkit-keyframes girl-attack {
+  from {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+  }
+  to {
+    -webkit-transform: translate3d(0, -1887px, 0);
+            transform: translate3d(0, -1887px, 0);
+  }
+}
+
+@keyframes girl-attack {
+  from {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+  }
+  to {
+    -webkit-transform: translate3d(0, -1887px, 0);
+            transform: translate3d(0, -1887px, 0);
+  }
+}
+
+@-webkit-keyframes girl-dead {
+  from {
+    -webkit-transform: translate3d(0, -1896px, 0);
+            transform: translate3d(0, -1896px, 0);
+  }
+  to {
+    -webkit-transform: translate3d(0, -4726px, 0);
+            transform: translate3d(0, -4726px, 0);
+  }
+}
+
+@keyframes girl-dead {
+  from {
+    -webkit-transform: translate3d(0, -1896px, 0);
+            transform: translate3d(0, -1896px, 0);
+  }
+  to {
+    -webkit-transform: translate3d(0, -4726px, 0);
+            transform: translate3d(0, -4726px, 0);
+  }
+}
+
+@-webkit-keyframes girl-idle {
+  from {
+    -webkit-transform: translate3d(0, -4966px, 0);
+            transform: translate3d(0, -4966px, 0);
+  }
+  to {
+    -webkit-transform: translate3d(0, -100%, 0);
+            transform: translate3d(0, -100%, 0);
+  }
+}
+
+@keyframes girl-idle {
+  from {
+    -webkit-transform: translate3d(0, -4966px, 0);
+            transform: translate3d(0, -4966px, 0);
+  }
+  to {
+    -webkit-transform: translate3d(0, -100%, 0);
+            transform: translate3d(0, -100%, 0);
+  }
+}
+
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;

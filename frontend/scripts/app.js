@@ -59,10 +59,12 @@ function setPlayerNumber(player) {
 
 // TODO
 function unknownCode(args) {
+    showHide(createJoinSection, selectedPlayerSection);
     console.log('Unknown code')
 }
 
 // TODO
 function tooManyPlayers(args) {
+    showHide(createJoinSection, selectedPlayerSection);
     console.log('Too many players')
 }

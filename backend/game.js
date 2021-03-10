@@ -16,7 +16,7 @@ function initGameState() {
                 lives: 10
             }
         ],
-        questions: {}
+        question: {}
     }
 }
 

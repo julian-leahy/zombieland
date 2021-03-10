@@ -50,15 +50,17 @@ io.on('connection', client => {
         client.emit('setPlayer', 2);
 
         generateQuestion(room);
-
+        emitAllDisplayQuestion(room, true);
     }
-
 
 })
 
 function generateQuestion(room) {
-    state[room].questions = question();
-    console.log(state[room].questions);
+    state[room].question = question();
+}
+
+function emitAllDisplayQuestion(room, newGame) {
+    io.sockets.in(room).emit('displayQuestion', JSON.stringify(state[room].question), newGame);
 }
 
 httpServer.listen(process.env.PORT || 3000);

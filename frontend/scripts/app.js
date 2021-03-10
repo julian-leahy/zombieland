@@ -6,7 +6,7 @@ socket.on('getGameCode', displayGameCode);
 socket.on('setPlayer', setPlayerNumber);
 socket.on('unknownCode', unknownCode);
 socket.on('tooManyPlayers', tooManyPlayers);
-
+socket.on('displayQuestion', displayQuestion);
 
 
 /**** sections for show or hide ****/
@@ -55,6 +55,10 @@ function initialiseNewGame(player) {
 
 function setPlayerNumber(player) {
     playerNumber = player;
+}
+
+function displayQuestion(state, isNewGame) {
+    console.log(JSON.parse(state))
 }
 
 // TODO

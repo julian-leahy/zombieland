@@ -10,7 +10,10 @@ const firstLives = document.querySelector('#firstLives');
 const secondLives = document.querySelector('#secondLives');
 
 const updateLeaderBoard = (winner, p, gameOver) => {
-    if (winner == 0) return; // TODO
+    if (winner == 0) {
+        resetLeaderboard(gameOver);
+        return;
+    }
 
     /* Calculate time difference */
     let timeDif = (Math.max(p[0].time, p[1].time) - Math.min(p[0].time, p[1].time)) / 1000;

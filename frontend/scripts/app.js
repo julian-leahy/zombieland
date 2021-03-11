@@ -10,7 +10,6 @@ if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
 } else {
     server = 'https://glacial-reaches-95195.herokuapp.com/'
 }
-
 const socket = io(server);
 
 socket.on('getGameCode', displayGameCode);
@@ -32,7 +31,6 @@ const gameCodeInput = document.querySelector('#gameCodeInput');
 
 /**** players input to question ****/
 const userInput = document.querySelector('#userInput');
-
 
 /**** buttons ****/
 const createGameBtn = document.querySelector('#createGameBtn');
@@ -82,6 +80,7 @@ function displayQuestion(state, isNewGame) {
     nextQuestionBtn.classList.add('hidden');
     respawn();
     canSubmit = true;
+    userInput.readOnly = false;
     if (isNewGame) showHide(gamePageSelection, selectedPlayerSection);
     questionInput(JSON.parse(state));
     userInput.focus();
@@ -110,7 +109,9 @@ function handleGameOver(playersObj) {
 
 userInput.addEventListener('keyup', (e) => {
     if (e.code === 'Enter' && userInput.value && canSubmit) {
+        console.log('oh fuck')
         canSubmit = false;
+        userInput.readOnly = true;
         userInput.style.backgroundColor = '#ffa500';
         const answer = { id: playerNumber, input: userInput.value };
         socket.emit('playerInput', JSON.stringify(answer));

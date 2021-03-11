@@ -10,15 +10,16 @@ const firstLives = document.querySelector('#firstLives');
 const secondLives = document.querySelector('#secondLives');
 
 const updateLeaderBoard = (winner, p, gameOver) => {
-    if (winner == 0) {
-        resetLeaderboard(gameOver);
-        return;
-    }
 
     /* Calculate time difference */
-    let timeDif = (Math.max(p[0].time, p[1].time) - Math.min(p[0].time, p[1].time)) / 1000;
-    let timeDif1 = (winner == 1) ? '' : `+ ${timeDif}`;
-    let timeDif2 = (winner == 2) ? '' : `+ ${timeDif}`;
+    let timeDif, timeDif1, timeDif2;
+    if (winner != 0) {
+        timeDif = (Math.max(p[0].time, p[1].time) - Math.min(p[0].time, p[1].time)) / 1000;
+        timeDif1 = (winner == 1) ? '' : `+ ${timeDif}`;
+        timeDif2 = (winner == 2) ? '' : `+ ${timeDif}`;
+    } else {
+        timeDif1 = timeDif2 = 'N/A'
+    }
 
     let player1Position, player2Position;
     /* Determine position on leaderboard */
@@ -34,8 +35,8 @@ const updateLeaderBoard = (winner, p, gameOver) => {
         displayResultFirst(2, p[1].zombie, p[1].answer, timeDif2, p[1].lives);
     }
     /* Flash winner */
-
-    winner == 1 ? player1Position.classList.add('flash-winner') : player2Position.classList.add('flash-winner');
+    if (winner != 0)
+        winner == 1 ? player1Position.classList.add('flash-winner') : player2Position.classList.add('flash-winner');
 
     setTimeout(() => {
         resetLeaderboard(gameOver);

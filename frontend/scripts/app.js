@@ -4,7 +4,14 @@ import { killBoth, killPlayer1, killPlayer2, respawn } from "./animations.js";
 import updateLeaderBoard from "./leaderboard.js";
 import { gameOverPlayer1, gameOverPlayer2 } from "./gameover.js";
 
-const socket = io('http://localhost:3000');
+let server;
+if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+    server = 'http://localhost:3000'
+} else {
+    server = 'https://glacial-reaches-95195.herokuapp.com/'
+}
+
+const socket = io(server);
 
 socket.on('getGameCode', displayGameCode);
 socket.on('setPlayer', setPlayerNumber);

@@ -80,6 +80,7 @@ function questionResults(winner, playersObj) {
     if (winner == 2) killPlayer1();
 
     updateLeaderBoard(winner, players);
+
 }
 
 userInput.addEventListener('keyup', (e) => {

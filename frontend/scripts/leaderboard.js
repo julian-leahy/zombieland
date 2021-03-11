@@ -1,5 +1,7 @@
 const first = document.querySelector('#first');
 const second = document.querySelector('#second');
+const firstIcon = document.querySelector('#firstIcon');
+const secondIcon = document.querySelector('#secondIcon');
 const firstAnswer = document.querySelector('#firstAnswer');
 const secondAnswer = document.querySelector('#secondAnswer');
 const firstTimeDiff = document.querySelector('#firstTimeDiff');
@@ -9,37 +11,44 @@ const secondLives = document.querySelector('#secondLives');
 
 const updateLeaderBoard = (winner, p) => {
     if (winner == 0) return; // TODO
-    winner == 1 ? first.classList.add('flash-winner') : second.classList.add('flash-winner');
-    const t1 = parseInt(p[0].time);
-    const t2 = parseInt(p[1].time);
-    let timeDif = (Math.max(t1, t2) - Math.min(t1, t2)) / 1000;
+
+    /* Calculate time difference */
+    let timeDif = (Math.max(p[0].time, p[1].time) - Math.min(p[0].time, p[1].time)) / 1000;
     let timeDif1 = (winner == 1) ? '' : `+ ${timeDif}`;
     let timeDif2 = (winner == 2) ? '' : `+ ${timeDif}`;
 
-    displayResultFirst(p[0].answer, timeDif1, p[0].lives);
-    displayResultSecond(p[1].answer, timeDif2, p[1].lives);
-
+    let player1Position, player2Position;
+    /* Determine position on leaderboard */
+    if (p[0].lives >= p[1].lives) {
+        player1Position = first;
+        player2Position = second;
+        displayResultFirst(1, p[0].zombie, p[0].answer, timeDif1, p[0].lives);
+        displayResultSecond(2, p[1].zombie, p[1].answer, timeDif2, p[1].lives);
+    } else {
+        player2Position = first;
+        player1Position = second;
+        displayResultSecond(1, p[0].zombie, p[0].answer, timeDif1, p[0].lives);
+        displayResultFirst(2, p[1].zombie, p[1].answer, timeDif2, p[1].lives);
+    }
+    /* Flash winner */
+    winner == 1 ? player1Position.classList.add('flash-winner') : player2Position.classList.add('flash-winner');
 }
 
-const displayResultFirst = (a, t, l) => {
-    firstAnswer.innerText = a;
-    firstTimeDiff.innerText = t;
-    firstLives.innerText = l
+const displayResultFirst = (player, icon, answer, timeDif, lives) => {
+    firstIcon.innerText = `Player ${player}`;
+    firstIcon.style.backgroundImage = `url('./images/${icon}-icon.png')`;
+    firstAnswer.innerText = answer;
+    firstTimeDiff.innerText = timeDif;
+    firstLives.innerText = lives
 }
 
-const displayResultSecond = (a, t, l) => {
-    secondAnswer.innerText = a;
-    secondTimeDiff.innerText = t;
-    secondLives.innerText = l
+const displayResultSecond = (player, icon, answer, timeDif, lives) => {
+    secondIcon.innerText = `Player ${player}`;
+    secondIcon.style.backgroundImage = `url('./images/${icon}-icon.png')`;
+    secondAnswer.innerText = answer;
+    secondTimeDiff.innerText = timeDif;
+    secondLives.innerText = lives
 }
+
 
 export default updateLeaderBoard;
-
-/**
- answer: "132"
-id: 1
-lives: 10
-time: 1615415919141
-zombie: "boy"
-
- */

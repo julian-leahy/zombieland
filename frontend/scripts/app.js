@@ -2,6 +2,7 @@ import { showHide } from "./utils.js";
 import questionInput from "./questions.js";
 import { killBoth, killPlayer1, killPlayer2, respawn } from "./animations.js";
 import updateLeaderBoard from "./leaderboard.js";
+import { gameOverPlayer1, gameOverPlayer2 } from "./gameover.js";
 
 const socket = io('http://localhost:3000');
 
@@ -11,6 +12,7 @@ socket.on('unknownCode', unknownCode);
 socket.on('tooManyPlayers', tooManyPlayers);
 socket.on('displayQuestion', displayQuestion);
 socket.on('questionResults', questionResults);
+socket.on('gameOver', handleGameOver);
 
 /**** sections for show or hide ****/
 const createJoinSection = document.querySelector('#createJoinSection');
@@ -78,17 +80,25 @@ function displayQuestion(state, isNewGame) {
     userInput.focus();
 }
 
-function questionResults(winner, playersObj) {
+function questionResults(winner, playersObj, gameOver) {
     const players = JSON.parse(playersObj);
     if (winner == 0) killBoth();
     if (winner == 1) killPlayer2();
     if (winner == 2) killPlayer1();
-    updateLeaderBoard(winner, players);
+    updateLeaderBoard(winner, players, gameOver);
 }
 
 function nextQuestion() {
     nextQuestionBtn.classList.add('hidden');
     socket.emit('nextQuestion');
+}
+
+function handleGameOver(playersObj) {
+    const players = JSON.parse(playersObj);
+    if (players[0].lives == 0)
+        gameOverPlayer1();
+    if (players[1].lives == 0)
+        gameOverPlayer2();
 }
 
 userInput.addEventListener('keyup', (e) => {

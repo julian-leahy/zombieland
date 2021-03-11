@@ -74,9 +74,11 @@ io.on('connection', client => {
             playerCount = 0;
             const winner = checkAnswers(players, correctAnswer); // 1,2 or 0 if both wrong
             const gameOver = updateLives(players, winner);
-            emitAllResults(room, winner);
-        }
 
+            emitAllResults(room, winner, gameOver);
+
+            if (gameOver) emitAllGameOver(room);
+        }
     }
 
     function handleNextQuestion() {
@@ -102,9 +104,14 @@ function emitAllDisplayQuestion(room, newGame) {
     }, 3000);
 }
 
-function emitAllResults(room, winner) {
+function emitAllResults(room, winner, gameOver) {
     io.sockets.in(room)
-        .emit('questionResults', winner, JSON.stringify(state[room].players));
+        .emit('questionResults', winner, JSON.stringify(state[room].players), gameOver);
+}
+
+function emitAllGameOver(room) {
+    io.sockets.in(room)
+        .emit('gameOver', JSON.stringify(state[room].players));
 }
 
 httpServer.listen(process.env.PORT || 3000);

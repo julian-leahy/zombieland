@@ -9,7 +9,7 @@ const secondTimeDiff = document.querySelector('#secondTimeDiff');
 const firstLives = document.querySelector('#firstLives');
 const secondLives = document.querySelector('#secondLives');
 
-const updateLeaderBoard = (winner, p) => {
+const updateLeaderBoard = (winner, p, gameOver) => {
     if (winner == 0) return; // TODO
 
     /* Calculate time difference */
@@ -35,7 +35,7 @@ const updateLeaderBoard = (winner, p) => {
     winner == 1 ? player1Position.classList.add('flash-winner') : player2Position.classList.add('flash-winner');
 
     setTimeout(() => {
-        resetLeaderboard();
+        resetLeaderboard(gameOver);
     }, 3000);
 
 }
@@ -56,10 +56,11 @@ const displayResultSecond = (player, icon, answer, timeDif, lives) => {
     secondLives.innerText = lives
 }
 
-const resetLeaderboard = () => {
+const resetLeaderboard = (gameOver) => {
     first.classList.remove('flash-winner');
     second.classList.remove('flash-winner');
-    document.querySelector('#nextQuestionBtn').classList.remove('hidden');
+    if (!gameOver)
+        document.querySelector('#nextQuestionBtn').classList.remove('hidden');
 }
 
 

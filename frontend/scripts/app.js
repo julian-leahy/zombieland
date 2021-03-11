@@ -50,6 +50,7 @@ let playerNumber;
 let canSubmit;
 
 function createGame() {
+    if (gameCodeInput.value) return;
     socket.emit('createNewRoom');
     initialiseNewGame(1);
 }

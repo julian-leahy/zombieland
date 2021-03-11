@@ -8,8 +8,12 @@ const firstTimeDiff = document.querySelector('#firstTimeDiff');
 const secondTimeDiff = document.querySelector('#secondTimeDiff');
 const firstLives = document.querySelector('#firstLives');
 const secondLives = document.querySelector('#secondLives');
+const correctAnswer = document.querySelector('#correctAnswer');
+const nextQuestBtn = document.querySelector('#nextQuestionBtn');
+const tombstone = document.querySelector('.tombstone');
 
-const updateLeaderBoard = (winner, p, gameOver) => {
+const updateLeaderBoard = (winner, state, gameOver) => {
+    let p = state.players;
 
     /* Calculate time difference */
     let timeDif, timeDif1, timeDif2;
@@ -18,7 +22,7 @@ const updateLeaderBoard = (winner, p, gameOver) => {
         timeDif1 = (winner == 1) ? '' : `+ ${timeDif}`;
         timeDif2 = (winner == 2) ? '' : `+ ${timeDif}`;
     } else {
-        timeDif1 = timeDif2 = 'N/A'
+        timeDif1 = timeDif2 = ''
     }
 
     let player1Position, player2Position;
@@ -38,9 +42,10 @@ const updateLeaderBoard = (winner, p, gameOver) => {
     if (winner != 0)
         winner == 1 ? player1Position.classList.add('flash-winner') : player2Position.classList.add('flash-winner');
 
-    setTimeout(() => {
-        resetLeaderboard(gameOver);
-    }, 3000);
+    tombstone.classList.add('riseup');
+    correctAnswer.innerHTML = state.question.answer;
+
+    setTimeout(() => { resetLeaderboard(gameOver) }, 3000);
 
 }
 
@@ -64,7 +69,7 @@ const resetLeaderboard = (gameOver) => {
     first.classList.remove('flash-winner');
     second.classList.remove('flash-winner');
     if (!gameOver)
-        document.querySelector('#nextQuestionBtn').classList.remove('hidden');
+        nextQuestBtn.classList.remove('hidden');
 }
 
 

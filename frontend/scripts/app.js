@@ -31,6 +31,7 @@ const gameCodeInput = document.querySelector('#gameCodeInput');
 
 /**** players input to question ****/
 const userInput = document.querySelector('#userInput');
+const tombstoneReset = document.querySelector('.tombstone');
 
 /**** buttons ****/
 const createGameBtn = document.querySelector('#createGameBtn');
@@ -46,7 +47,7 @@ gameCodeInput.addEventListener('keyup', function(e) {
 
 /**** globals ****/
 let playerNumber;
-let canSubmit = true;
+let canSubmit;
 
 function createGame() {
     socket.emit('createNewRoom');
@@ -70,6 +71,7 @@ function initialiseNewGame(player) {
 
     const playersImage = (player == 1) ? './images/boy-selected.png' : './images/girl-selected.png';
     playerProfile.style.backgroundImage = `url('${playersImage}')`;
+    canSubmit = true;
 }
 
 function setPlayerNumber(player) {
@@ -77,6 +79,7 @@ function setPlayerNumber(player) {
 }
 
 function displayQuestion(state, isNewGame) {
+    tombstoneReset.classList.remove('riseup');
     nextQuestionBtn.classList.add('hidden');
     respawn();
     canSubmit = true;
@@ -86,12 +89,12 @@ function displayQuestion(state, isNewGame) {
     userInput.focus();
 }
 
-function questionResults(winner, playersObj, gameOver) {
-    const players = JSON.parse(playersObj);
+function questionResults(winner, stateObj, gameOver) {
+    const state = JSON.parse(stateObj);
     if (winner == 0) killBoth();
     if (winner == 1) killPlayer2();
     if (winner == 2) killPlayer1();
-    updateLeaderBoard(winner, players, gameOver);
+    updateLeaderBoard(winner, state, gameOver);
 }
 
 function nextQuestion() {
@@ -109,7 +112,6 @@ function handleGameOver(playersObj) {
 
 userInput.addEventListener('keyup', (e) => {
     if (e.code === 'Enter' && userInput.value && canSubmit) {
-        console.log('oh fuck')
         canSubmit = false;
         userInput.readOnly = true;
         userInput.style.backgroundColor = '#ffa500';

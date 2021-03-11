@@ -11,7 +11,7 @@ const { initGameState, question, checkAnswers, updateLives } = require('./game')
 /* Globals */
 const clientRoom = {};
 const state = {};
-let playerCount = 0;
+let playerCount;
 let questionBtnClicked = false;
 
 io.on('connection', client => {
@@ -93,6 +93,7 @@ io.on('connection', client => {
 })
 
 function generateQuestion(room) {
+    playerCount = 0;
     state[room].question = question();
 }
 
@@ -106,7 +107,7 @@ function emitAllDisplayQuestion(room, newGame) {
 
 function emitAllResults(room, winner, gameOver) {
     io.sockets.in(room)
-        .emit('questionResults', winner, JSON.stringify(state[room].players), gameOver);
+        .emit('questionResults', winner, JSON.stringify(state[room]), gameOver);
 }
 
 function emitAllGameOver(room) {

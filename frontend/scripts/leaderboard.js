@@ -31,7 +31,13 @@ const updateLeaderBoard = (winner, p) => {
         displayResultFirst(2, p[1].zombie, p[1].answer, timeDif2, p[1].lives);
     }
     /* Flash winner */
+
     winner == 1 ? player1Position.classList.add('flash-winner') : player2Position.classList.add('flash-winner');
+
+    setTimeout(() => {
+        resetLeaderboard();
+    }, 3000);
+
 }
 
 const displayResultFirst = (player, icon, answer, timeDif, lives) => {
@@ -48,6 +54,12 @@ const displayResultSecond = (player, icon, answer, timeDif, lives) => {
     secondAnswer.innerText = answer;
     secondTimeDiff.innerText = timeDif;
     secondLives.innerText = lives
+}
+
+const resetLeaderboard = () => {
+    first.classList.remove('flash-winner');
+    second.classList.remove('flash-winner');
+    document.querySelector('#nextQuestionBtn').classList.remove('hidden');
 }
 
 

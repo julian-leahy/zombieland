@@ -1,6 +1,6 @@
 import { showHide } from "./utils.js";
 import questionInput from "./questions.js";
-import { killBoth, killPlayer1, killPlayer2 } from "./animations.js";
+import { killBoth, killPlayer1, killPlayer2, respawn } from "./animations.js";
 import updateLeaderBoard from "./leaderboard.js";
 
 const socket = io('http://localhost:3000');
@@ -28,16 +28,18 @@ const userInput = document.querySelector('#userInput');
 /**** buttons ****/
 const createGameBtn = document.querySelector('#createGameBtn');
 const joinGameBtn = document.querySelector('#joinGameBtn');
+const nextQuestionBtn = document.querySelector('#nextQuestionBtn');
 
 createGameBtn.addEventListener('click', createGame);
 joinGameBtn.addEventListener('click', joinGame);
+nextQuestionBtn.addEventListener('click', nextQuestion);
 gameCodeInput.addEventListener('keyup', function(e) {
     e.code === 'Enter' && gameCodeInput.value ? joinGame() : false;
 })
 
 /**** globals ****/
 let playerNumber;
-let submitted = true;
+let canSubmit = true;
 
 function createGame() {
     socket.emit('createNewRoom');
@@ -68,6 +70,9 @@ function setPlayerNumber(player) {
 }
 
 function displayQuestion(state, isNewGame) {
+    nextQuestionBtn.classList.add('hidden');
+    respawn();
+    canSubmit = true;
     if (isNewGame) showHide(gamePageSelection, selectedPlayerSection);
     questionInput(JSON.parse(state));
     userInput.focus();
@@ -78,14 +83,17 @@ function questionResults(winner, playersObj) {
     if (winner == 0) killBoth();
     if (winner == 1) killPlayer2();
     if (winner == 2) killPlayer1();
-
     updateLeaderBoard(winner, players);
+}
 
+function nextQuestion() {
+    nextQuestionBtn.classList.add('hidden');
+    socket.emit('nextQuestion');
 }
 
 userInput.addEventListener('keyup', (e) => {
-    if (e.code === 'Enter' && userInput.value && submitted) {
-        submitted = false;
+    if (e.code === 'Enter' && userInput.value && canSubmit) {
+        canSubmit = false;
         userInput.style.backgroundColor = '#ffa500';
         const answer = { id: playerNumber, input: userInput.value };
         socket.emit('playerInput', JSON.stringify(answer));

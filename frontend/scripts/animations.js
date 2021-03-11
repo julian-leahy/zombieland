@@ -19,6 +19,12 @@ export const killBoth = () => {
     player1.classList.add('dead');
 }
 
+export const respawn = () => {
+    removeClasses();
+    player2.classList.add('idle');
+    player1.classList.add('idle');
+}
+
 const removeClasses = () => {
     player1.className = '';
     player2.className = '';

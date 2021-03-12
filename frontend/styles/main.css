@@ -86,7 +86,7 @@ input[type=number] {
 .btn {
   border: none;
   font-size: 2em;
-  padding: 5px;
+  padding: 10px;
   font-family: "Creepster";
   color: #8a0303;
   -webkit-transition: background-color 700ms ease;

@@ -42,6 +42,8 @@ const joinGameBtn = document.querySelector('#joinGameBtn');
 const nextQuestionBtn = document.querySelector('#nextQuestionBtn');
 const startGameBtn = document.querySelector('#startGameBtn');
 
+const spinner = document.querySelector('#spinner');
+
 
 createGameBtn.addEventListener('click', createGame);
 joinGameBtn.addEventListener('click', joinGame);
@@ -105,15 +107,17 @@ function startGame() {
 }
 
 function displayQuestion(state, isNewGame) {
-    tombstoneReset.classList.remove('riseup');
-    nextQuestionBtn.classList.add('hidden');
-    hide(selectedPlayerSection);
+    if (isNewGame) {
+        showHide(gamePageSelection, optionScreenSelection);
+        hide(selectedPlayerSection);
+    }
+    hide(spinner);
     respawn();
+    tombstoneReset.classList.remove('riseup');
     canSubmit = true;
     userInput.readOnly = false;
-    if (isNewGame) showHide(gamePageSelection, optionScreenSelection);
-    questionInput(JSON.parse(state));
     userInput.focus();
+    questionInput(JSON.parse(state));
 }
 
 function questionResults(winner, stateObj, gameOver) {
@@ -146,8 +150,8 @@ userInput.addEventListener('keyup', (e) => {
     }
 })
 
-function hideQuestionBtn(args) {
-    hide(nextQuestionBtn);
+function hideQuestionBtn() {
+    showHide(spinner, nextQuestionBtn);
 }
 
 // TODO

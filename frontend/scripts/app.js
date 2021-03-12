@@ -70,7 +70,7 @@ function joinGame() {
     if (codeEntered == '') return;
     socket.emit('joinRoom', codeEntered);
     initialiseNewGame(2);
-    document.querySelector('#getReady').innerText = 'Get Ready!';
+    document.querySelector('#getReady').innerText = 'Room Joined!';
     const checkboxes = document.querySelectorAll('input[type=checkbox]');
     checkboxes.forEach(i => {
         i.checked = true;

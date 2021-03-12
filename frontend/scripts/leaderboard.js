@@ -19,11 +19,18 @@ const updateLeaderBoard = (winner, state, gameOver) => {
     let timeDif, timeDif1, timeDif2;
     if (winner != 0) {
         timeDif = (Math.max(p[0].time, p[1].time) - Math.min(p[0].time, p[1].time)) / 1000;
-        timeDif1 = (winner == 1) ? '' : `+ ${timeDif}`;
-        timeDif2 = (winner == 2) ? '' : `+ ${timeDif}`;
+        if (p[0].time > p[1].time) {
+            timeDif1 = `+${timeDif}`;
+            timeDif2 = '';
+        } else {
+            timeDif2 = `+${timeDif}`;
+            timeDif1 = '';
+        }
     } else {
         timeDif1 = timeDif2 = ''
     }
+
+
 
     let player1Position, player2Position;
     /* Determine position on leaderboard */

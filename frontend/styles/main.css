@@ -108,6 +108,7 @@ input[type=number] {
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
+  color: #fff;
 }
 
 .custom-checkbox input {
@@ -119,7 +120,7 @@ input[type=number] {
 }
 
 .custom-checkbox input:checked ~ .checkmark {
-  background-color: #2196F3;
+  background-color: #8a0303;
 }
 
 .custom-checkbox input:checked ~ .checkmark:after {
@@ -132,7 +133,7 @@ input[type=number] {
   left: 0;
   height: 25px;
   width: 25px;
-  background-color: #eee;
+  background-color: #333;
 }
 
 .custom-checkbox .checkmark:after {
@@ -150,7 +151,7 @@ input[type=number] {
 }
 
 .custom-checkbox:hover input ~ .checkmark {
-  background-color: #ccc;
+  background-color: #ffa500;
 }
 
 @-webkit-keyframes glow {
@@ -428,7 +429,7 @@ body {
   position: absolute;
 }
 
-.card, .initial-screen, .selected-player {
+.card, .initial-screen, .selected-player, .options {
   background-color: rgba(0, 0, 0, 0.2);
   border: 1px solid #666;
   -webkit-box-align: center;
@@ -483,10 +484,9 @@ body {
 }
 
 /* option screen */
-.options {
-  width: 900px;
-  height: 500px;
-  background-color: #fff;
+.start-game-btn {
+  width: 100%;
+  margin-top: 20px;
 }
 
 /* question input group */

@@ -57,7 +57,7 @@ io.on('connection', client => {
         //emitAllDisplayOptions(room);
         setTimeout(() => {
             client.emit('displayOptions')
-        }, 500);
+        }, 3000);
     }
 
     function handleNewGame(options) {

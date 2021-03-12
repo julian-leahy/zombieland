@@ -18,12 +18,13 @@ function initGameState() {
                 lives: 10
             }
         ],
-        question: {}
+        question: {},
+        options: []
     }
 }
 
-function question() {
-    const type = getQuestionType();
+function question(options) {
+    const type = getQuestionType(options);
     let question = {};
 
     switch (type) {
@@ -33,7 +34,7 @@ function question() {
         case 'multiplication':
             question = getMultiplication();
             break;
-        default:
+        case 'subtraction':
             question = getSubtraction();
             break;
     }
@@ -89,9 +90,8 @@ function updateLives(p, w) {
     }
 }
 
-function getQuestionType() {
-    const type = ['tables', 'multiplication', 'subtraction'];
-    return type[getRandomInt(3)];
+function getQuestionType(options) {
+    return options[getRandomInt(options.length)];
 }
 
 function getTables() {

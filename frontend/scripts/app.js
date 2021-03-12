@@ -1,4 +1,4 @@
-import { showHide } from "./utils.js";
+import { hide, showHide } from "./utils.js";
 import questionInput from "./questions.js";
 import { killBoth, killPlayer1, killPlayer2, respawn } from "./animations.js";
 import updateLeaderBoard from "./leaderboard.js";
@@ -16,6 +16,7 @@ socket.on('getGameCode', displayGameCode);
 socket.on('setPlayer', setPlayerNumber);
 socket.on('unknownCode', unknownCode);
 socket.on('tooManyPlayers', tooManyPlayers);
+socket.on('displayOptions', displayOptions);
 socket.on('displayQuestion', displayQuestion);
 socket.on('questionResults', questionResults);
 socket.on('gameOver', handleGameOver);
@@ -24,6 +25,7 @@ socket.on('gameOver', handleGameOver);
 const createJoinSection = document.querySelector('#createJoinSection');
 const selectedPlayerSection = document.querySelector('#selectedPlayerSection');
 const gamePageSelection = document.querySelector('#gamePageSelection');
+const optionScreenSelection = document.querySelector('#optionScreenSelection');
 
 /**** show players image and game code ****/
 const playerProfile = document.querySelector('#playerProfile');
@@ -37,9 +39,13 @@ const tombstoneReset = document.querySelector('.tombstone');
 const createGameBtn = document.querySelector('#createGameBtn');
 const joinGameBtn = document.querySelector('#joinGameBtn');
 const nextQuestionBtn = document.querySelector('#nextQuestionBtn');
+const startGameBtn = document.querySelector('#startGameBtn');
+
 
 createGameBtn.addEventListener('click', createGame);
 joinGameBtn.addEventListener('click', joinGame);
+startGameBtn.addEventListener('click', startGame);
+
 nextQuestionBtn.addEventListener('click', nextQuestion);
 gameCodeInput.addEventListener('keyup', function(e) {
     e.code === 'Enter' && gameCodeInput.value ? joinGame() : false;
@@ -65,11 +71,14 @@ function joinGame() {
     socket.emit('joinRoom', codeEntered);
     initialiseNewGame(2);
     document.querySelector('#getReady').innerText = 'Get Ready!';
+    const checkboxes = document.querySelectorAll('input[type=checkbox]');
+    checkboxes.forEach(i => {
+        i.checked = true;
+    })
 }
 
 function initialiseNewGame(player) {
     showHide(selectedPlayerSection, createJoinSection);
-
     const playersImage = (player == 1) ? './images/boy-selected.png' : './images/girl-selected.png';
     playerProfile.style.backgroundImage = `url('${playersImage}')`;
     canSubmit = true;
@@ -79,13 +88,29 @@ function setPlayerNumber(player) {
     playerNumber = player;
 }
 
+function displayOptions(args) {
+    showHide(optionScreenSelection, selectedPlayerSection);
+}
+
+function startGame() {
+    const options = [];
+    const checkboxes = document.querySelectorAll('input[type=checkbox]:checked');
+
+    checkboxes.forEach(i => {
+        options.push(i.value)
+    });
+
+    socket.emit('newGame', options);
+}
+
 function displayQuestion(state, isNewGame) {
     tombstoneReset.classList.remove('riseup');
     nextQuestionBtn.classList.add('hidden');
+    hide(selectedPlayerSection);
     respawn();
     canSubmit = true;
     userInput.readOnly = false;
-    if (isNewGame) showHide(gamePageSelection, selectedPlayerSection);
+    if (isNewGame) showHide(gamePageSelection, optionScreenSelection);
     questionInput(JSON.parse(state));
     userInput.focus();
 }

@@ -19,6 +19,7 @@ io.on('connection', client => {
     client.on('joinRoom', handleJoinRoom);
     client.on('playerInput', handlePlayerInput);
     client.on('nextQuestion', handleNextQuestion);
+    client.on('newGame', handleNewGame);
 
     function handleCreateNewRoom() {
         const room = createRoomName(5);
@@ -53,8 +54,16 @@ io.on('connection', client => {
         client.number = 2;
         client.emit('setPlayer', 2);
 
+        //emitAllDisplayOptions(room);
+        setTimeout(() => {
+            client.emit('displayOptions')
+        }, 500);
+    }
+
+    function handleNewGame(options) {
+        const room = clientRoom[client.id];
+        state[room].options = options;
         generateQuestion(room);
-        // bool - new game
         emitAllDisplayQuestion(room, true);
     }
 
@@ -94,8 +103,10 @@ io.on('connection', client => {
 
 function generateQuestion(room) {
     playerCount = 0;
-    state[room].question = question();
+    const options = state[room].options;
+    state[room].question = question(options);
 }
+
 
 function emitAllDisplayQuestion(room, newGame) {
     setTimeout(() => {

@@ -96,6 +96,63 @@ input[type=number] {
   background-color: #FCEF93;
 }
 
+/* custom checkbox */
+.custom-checkbox {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.custom-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.custom-checkbox input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+.custom-checkbox input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.custom-checkbox .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+.custom-checkbox .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+.custom-checkbox:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
 @-webkit-keyframes glow {
   5% {
     background-color: #ffa500;
@@ -425,6 +482,13 @@ body {
   width: 100%;
 }
 
+/* option screen */
+.options {
+  width: 900px;
+  height: 500px;
+  background-color: #fff;
+}
+
 /* question input group */
 .input-container {
   margin-top: 130px;
@@ -545,23 +609,5 @@ body {
   font-size: 2em;
   -webkit-transform: translate(-30%, -50%);
           transform: translate(-30%, -50%);
-}
-
-@-webkit-keyframes tombRise {
-  0% {
-    bottom: -100%;
-  }
-  100% {
-    bottom: 0;
-  }
-}
-
-@keyframes tombRise {
-  0% {
-    bottom: -100%;
-  }
-  100% {
-    bottom: 0;
-  }
 }
 /*# sourceMappingURL=main.css.map */

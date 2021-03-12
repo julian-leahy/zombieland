@@ -12,7 +12,6 @@ const { initGameState, question, checkAnswers, updateLives } = require('./game')
 const clientRoom = {};
 const state = {};
 let playerCount;
-let questionBtnClicked = false;
 
 io.on('connection', client => {
     client.on('createNewRoom', handleCreateNewRoom);
@@ -91,10 +90,8 @@ io.on('connection', client => {
     }
 
     function handleNextQuestion() {
-        if (questionBtnClicked) return;
-
-        questionBtnClicked = true;
         const room = clientRoom[client.id];
+        emitAllButtonHide(room)
         generateQuestion(room);
         emitAllDisplayQuestion(room, false);
     }
@@ -107,12 +104,10 @@ function generateQuestion(room) {
     state[room].question = question(options);
 }
 
-
 function emitAllDisplayQuestion(room, newGame) {
     setTimeout(() => {
         io.sockets.in(room)
             .emit('displayQuestion', JSON.stringify(state[room].question), newGame);
-        questionBtnClicked = false;
     }, 3000);
 }
 
@@ -124,6 +119,11 @@ function emitAllResults(room, winner, gameOver) {
 function emitAllGameOver(room) {
     io.sockets.in(room)
         .emit('gameOver', JSON.stringify(state[room].players));
+}
+
+function emitAllButtonHide(room) {
+    io.sockets.in(room)
+        .emit('hideQuestionBtn');
 }
 
 httpServer.listen(process.env.PORT || 3000);

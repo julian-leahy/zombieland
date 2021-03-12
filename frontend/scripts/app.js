@@ -19,6 +19,7 @@ socket.on('tooManyPlayers', tooManyPlayers);
 socket.on('displayOptions', displayOptions);
 socket.on('displayQuestion', displayQuestion);
 socket.on('questionResults', questionResults);
+socket.on('hideQuestionBtn', hideQuestionBtn);
 socket.on('gameOver', handleGameOver);
 
 /**** sections for show or hide ****/
@@ -124,7 +125,6 @@ function questionResults(winner, stateObj, gameOver) {
 }
 
 function nextQuestion() {
-    nextQuestionBtn.classList.add('hidden');
     socket.emit('nextQuestion');
 }
 
@@ -145,6 +145,10 @@ userInput.addEventListener('keyup', (e) => {
         socket.emit('playerInput', JSON.stringify(answer));
     }
 })
+
+function hideQuestionBtn(args) {
+    hide(nextQuestionBtn);
+}
 
 // TODO
 function unknownCode(args) {

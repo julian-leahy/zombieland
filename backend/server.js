@@ -53,7 +53,6 @@ io.on('connection', client => {
         client.number = 2;
         client.emit('setPlayer', 2);
 
-        //emitAllDisplayOptions(room);
         setTimeout(() => {
             client.emit('displayOptions')
         }, 3000);
@@ -105,10 +104,11 @@ function generateQuestion(room) {
 }
 
 function emitAllDisplayQuestion(room, newGame) {
+    let delay = (newGame) ? 100 : 3000;
     setTimeout(() => {
         io.sockets.in(room)
             .emit('displayQuestion', JSON.stringify(state[room].question), newGame);
-    }, 3000);
+    }, delay);
 }
 
 function emitAllResults(room, winner, gameOver) {

@@ -37,6 +37,9 @@ function question(options) {
         case 'subtraction':
             question = getSubtraction();
             break;
+        case 'division':
+            question = getDivision();
+            break;
     }
 
     return question;
@@ -111,6 +114,17 @@ function getMultiplication() {
     question.operand = 'x';
     question.number2 = getRandomArbitrary(3, 99);
     question.answer = question.number1 * question.number2;
+
+    return question;
+}
+
+function getDivision() {
+    let question = {};
+    question.number2 = getRandomArbitrary(10, 99);
+    question.operand = '/';
+    const n2 = getRandomArbitrary(10, 99);
+    question.number1 = question.number2 * n2;
+    question.answer = question.number1 / question.number2;
 
     return question;
 }

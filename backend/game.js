@@ -95,10 +95,11 @@ function getQuestionType(options) {
 }
 
 function getTables() {
+    let hardTables = [7, 8, 12, 7, 8, 12, 7, 8, 12, 4, 6, 7, 8, 12];
     let question = {};
-    question.number1 = getRandomArbitrary(3, 12);
+    question.number1 = hardTables[getRandomArbitrary(0, hardTables.length - 1)];
     question.operand = 'x';
-    question.number2 = getRandomArbitrary(3, 12);
+    question.number2 = hardTables[getRandomArbitrary(0, hardTables.length - 1)];
     question.answer = question.number1 * question.number2;
 
     return question

@@ -1,7 +1,7 @@
 const httpServer = require("http").createServer();
 const io = require("socket.io")(httpServer, {
     cors: {
-        origin: "*",
+        origin: "https://elated-jang-67e207.netlify.app/",
         methods: ["GET", "POST"]
     }
 });

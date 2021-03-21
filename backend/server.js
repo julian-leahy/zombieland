@@ -1,7 +1,7 @@
 const httpServer = require("http").createServer();
 const io = require("socket.io")(httpServer, {
     cors: {
-        origin: "*:*",
+        origin: "https://glacial-reaches-95195.herokuapp.com/",
         methods: ["GET", "POST"]
     }
 });
